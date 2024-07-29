@@ -1,0 +1,94 @@
+﻿@model PagedList.Core.IPagedList<DomainClass.Businesses.Business>
+<style>
+    .active {
+        background-color: #f5f5f5;
+    }
+    
+    
+</style>
+@{int j = 1;}
+@foreach (var item in Model.OrderByDescending(x=>x.IsSponsor))
+{
+    int pageNumber = (((Model.PageNumber * 10) - 10 ) + (int)j);
+    
+    <div class="category-content__item__cat-product" data-assigned-lon="@item.Longitude" id="@pageNumber" data-assigned-count="@pageNumber" data-assigned-lat="@item.Latitude" data-assigned-isSponsor="@item.IsSponsor" data-assigned-datas="<div style='width:80%!important;height;80%!important;align-items: center !important;' ><img src='@item.FeatureImage'  ></div><br/><h6>@item.Name </h6><br/><div class='category-content__item__cat-product__content__text__desc__icon__star' data-star='3.5'></div>">
+
+        <div class="category-content__item__cat-product__image">
+            <a href="/BusinessHome/Index?Id=@item.Id">
+            <img src="@item.FeatureImage">
+            </a>
+        </div>
+        <div class="category-content__item__cat-product__content">
+            <div class="category-content__item__cat-product__content__text">
+                <div class="category-content__item__cat-product__content__text__desc">
+                    <div class="category-content__item__cat-product__content__text__desc__title">
+						<a href="/BusinessHome/Index?Id=@item.Id">
+						
+							<h4>@pageNumber - @item.Name </h4>
+						</a>
+                    </div>
+                    <div class="category-content__item__cat-product__content__text__desc__icon">
+                        <div class="category-content__item__cat-product__content__text__desc__icon__star"
+                             data-star="@item.Rate"></div>
+                        <span>@item.Rate</span>
+                    </div>
+                    <div class="category-content__item__cat-product__content__text__desc__link">
+                        <a href="/BusinessHome/Index?Id=@item.Id">@item.Address</a>
+                    </div>
+                    <div class="category-content__item__cat-product__content__text__desc__link">
+                        <button class="reqbtn" data-categoryid="@item.CategoryId" data-id="@item.Id" onclick="OpenQuotes(this)">درخواست از کسب و کار</button>
+                    </div>
+                </div>
+                <div class="category-content__item__cat-product__content__text__adress">
+                    <span>@item.Reviews</span>
+                    @*<span>برلین</span>*@
+                </div>
+            </div>
+        </div>
+        <a href="#"></a>
+    </div>
+    //i++;
+    j++;
+}
+<div class="category-content__item__number-page">
+    <div class="category-content__item__number-page__number">
+        <ul>
+            @if (@Model.PageNumber - 1 > 0)
+            {
+
+                <li>
+                    <button onclick="ChangePage(@Model.PageNumber - 1)" >
+                        <svg width="24" height="24" class="icon_svg">
+                            <path d="M9.75 17.58a1 1 0 01-.7-.28 1 1 0 010-1.42l3.8-3.88L9 8.12a1 1 0 111.41-1.42L15 11.3a1 1 0 010 1.4l-4.5 4.58a1 1 0 01-.75.3z">
+                            </path>
+                        </svg>
+                    </button>
+                </li>
+            }
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                <li class="paginate_button  @((i==Model.PageNumber?"active":""))">
+                    <button onclick="ChangePage(@i)"  >@i</button>
+                </li>
+            }
+
+            @if (Model.HasNextPage)
+            {
+                <li>
+                    <button onclick="ChangePage(@Model.PageNumber+1)" >
+                        <svg width="24" height="24" class="icon_svg">
+                            <path d="M14.25 17.58a1 1 0 01-.71-.3L9 12.7a1 1 0 010-1.4l4.5-4.58A1 1 0 0115 6.7a1 1 0 010 1.42L11.15 12 15 15.88a1 1 0 010 1.42 1 1 0 01-.75.28z">
+                            </path>
+                        </svg>
+                    </button>
+                </li>
+            }
+            </ul>
+    </div>
+    <div class="category-content__item__number-page__cunter">
+        <span>@Model.PageNumber از @Model.PageCount</span>
+    </div>
+</div>
+
+
+

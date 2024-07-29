@@ -1,0 +1,107 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+
+    <Compile Remove="Migrations\20210123102935_RemoveNationalCodeFromUser.cs" />
+    <Compile Remove="Migrations\20210123102935_RemoveNationalCodeFromUser.Designer.cs" />
+    <Compile Remove="Migrations\20210124070556_RemoveNationCodeAndUserSeed.cs" />
+    <Compile Remove="Migrations\20210124070556_RemoveNationCodeAndUserSeed.Designer.cs" />
+
+    <Compile Remove="Migrations\20210124094546_initial53463456.cs" />
+    <Compile Remove="Migrations\20210124094546_initial53463456.Designer.cs" />
+    <Compile Remove="Migrations\20210125102031_AddSoftDeleteForUser.cs" />
+    <Compile Remove="Migrations\20210125102031_AddSoftDeleteForUser.Designer.cs" />
+    <Compile Remove="Migrations\20210126064941_FeatureType.cs" />
+    <Compile Remove="Migrations\20210126064941_FeatureType.Designer.cs" />
+    <Compile Remove="Migrations\20210126070544_AddUserIdAutoGenerator.cs" />
+    <Compile Remove="Migrations\20210126070544_AddUserIdAutoGenerator.Designer.cs" />
+    <Compile Remove="Migrations\20210126071233_SoftDeleteAndAddUserIdAutoGenerator.cs" />
+    <Compile Remove="Migrations\20210126071233_SoftDeleteAndAddUserIdAutoGenerator.Designer.cs" />
+    <Compile Remove="Migrations\20210126081018_SoftDeleteAndAddUserIdAutoGenerator.cs" />
+    <Compile Remove="Migrations\20210126081018_SoftDeleteAndAddUserIdAutoGenerator.Designer.cs" />
+    <Compile Remove="Migrations\20210126091640_SoftDeleteAndAddUserIdAutoGenerator.cs" />
+    <Compile Remove="Migrations\20210126091640_SoftDeleteAndAddUserIdAutoGenerator.Designer.cs" />
+    <Compile Remove="Migrations\20210201055504_AddUserDisableFeature.cs" />
+    <Compile Remove="Migrations\20210201055504_AddUserDisableFeature.Designer.cs" />
+    <Compile Remove="Migrations\20210201060359_AddUserDisableFeature.cs" />
+    <Compile Remove="Migrations\20210201060359_AddUserDisableFeature.Designer.cs" />
+    <Compile Remove="Migrations\20210206060259_AlterGetHierarchyCategoriesSp.cs" />
+    <Compile Remove="Migrations\20210206060259_AlterGetHierarchyCategoriesSp.Designer.cs" />
+    <Compile Remove="Migrations\20210214073100_ChangeTypeOfValueInBusinessFeature.cs" />
+    <Compile Remove="Migrations\20210214073100_ChangeTypeOfValueInBusinessFeature.Designer.cs" />
+    <Compile Remove="Migrations\20210215070036_ChangeTypeOfValueTypeInFeatures.cs" />
+    <Compile Remove="Migrations\20210215070036_ChangeTypeOfValueTypeInFeatures.Designer.cs" />
+    <Compile Remove="Migrations\20210215073602_ChangeBusinessFeatureTypeToDouble.cs" />
+    <Compile Remove="Migrations\20210215073602_ChangeBusinessFeatureTypeToDouble.Designer.cs" />
+    <Compile Remove="Migrations\20210302094835_ChangerUserMediaAndAddUsername.cs" />
+    <Compile Remove="Migrations\20210302094835_ChangerUserMediaAndAddUsername.Designer.cs" />
+    <Compile Remove="Migrations\20210314074806_unnullableBusinessCategory.cs" />
+    <Compile Remove="Migrations\20210314074806_unnullableBusinessCategory.Designer.cs" />
+    <Compile Remove="Migrations\20210410093721_Nemche.cs" />
+    <Compile Remove="Migrations\20210410093721_Nemche.Designer.cs" />
+    <Compile Remove="Migrations\20210412101131_RemoveBusinessTimes.cs" />
+    <Compile Remove="Migrations\20210412101131_RemoveBusinessTimes.Designer.cs" />
+    <Compile Remove="Migrations\20210412101301_AddBusinessTimes.cs" />
+    <Compile Remove="Migrations\20210412101301_AddBusinessTimes.Designer.cs" />
+    <Compile Remove="Migrations\20210412113543_CreateGetAllCategoryWithParentsSp.cs" />
+    <Compile Remove="Migrations\20210412113543_CreateGetAllCategoryWithParentsSp.Designer.cs" />
+    <Compile Remove="Migrations\20210412115244_CreateGetAllCatsWithParentsSp.cs" />
+    <Compile Remove="Migrations\20210412115244_CreateGetAllCatsWithParentsSp.Designer.cs" />
+    <Compile Remove="Migrations\20210413055144_ChangeUnknownPrimary.cs" />
+    <Compile Remove="Migrations\20210413055144_ChangeUnknownPrimary.Designer.cs" />
+    <Compile Remove="Migrations\20210413062103_FixMigration.cs" />
+    <Compile Remove="Migrations\20210413062103_FixMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210413105520_test3.cs" />
+    <Compile Remove="Migrations\20210413105520_test3.Designer.cs" />
+    <Compile Remove="Migrations\20210413110000_CreateGetWithParentSp.cs" />
+    <Compile Remove="Migrations\20210413110000_CreateGetWithParentSp.Designer.cs" />
+    <Compile Remove="Migrations\20210413110543_AddBusinessTime.cs" />
+    <Compile Remove="Migrations\20210413110543_AddBusinessTime.Designer.cs" />
+    <Compile Remove="Migrations\20210413111228_AddBusinessTime.cs" />
+    <Compile Remove="Migrations\20210413111228_AddBusinessTime.Designer.cs" />
+    <Compile Remove="Migrations\20210413112540_Testttt.cs" />
+    <Compile Remove="Migrations\20210413112540_Testttt.Designer.cs" />
+    <Compile Remove="Migrations\20210413113551_DeleteHirerachyNamesCategoryTable.cs" />
+    <Compile Remove="Migrations\20210413113551_DeleteHirerachyNamesCategoryTable.Designer.cs" />
+    <Compile Remove="Migrations\20210414061510_AddBusinessQoute.cs" />
+    <Compile Remove="Migrations\20210414061510_AddBusinessQoute.Designer.cs" />
+    <Compile Remove="Migrations\20210414061854_AddBusinessQoute.cs" />
+    <Compile Remove="Migrations\20210414061854_AddBusinessQoute.Designer.cs" />
+    <Compile Remove="Migrations\20210414063134_AddBusinessQoute.cs" />
+    <Compile Remove="Migrations\20210414063134_AddBusinessQoute.Designer.cs" />
+    <Compile Remove="Migrations\20210421071728_AddUserActivityTable.cs" />
+    <Compile Remove="Migrations\20210421071728_AddUserActivityTable.Designer.cs" />
+    <Compile Remove="Migrations\20210505062556_AddCreatedAtToFriend.cs" />
+    <Compile Remove="Migrations\20210505062556_AddCreatedAtToFriend.Designer.cs" />
+    <Compile Remove="Migrations\20210505063313_AddCreatedAtToFriendAndNotification.cs" />
+    <Compile Remove="Migrations\20210505063313_AddCreatedAtToFriendAndNotification.Designer.cs" />
+    <Compile Remove="Migrations\20210509071311_FixFriendRelations.cs" />
+    <Compile Remove="Migrations\20210509071311_FixFriendRelations.Designer.cs" />
+    <Compile Remove="Migrations\20210509072254_FixFriendRelations.cs" />
+    <Compile Remove="Migrations\20210509072254_FixFriendRelations.Designer.cs" />
+    <Compile Remove="Migrations\20210509072614_RemoveOldFriendRelationColumns.cs" />
+    <Compile Remove="Migrations\20210509072614_RemoveOldFriendRelationColumns.Designer.cs" />
+    <Compile Remove="Migrations\20210512080237_ChangeNotification.cs" />
+    <Compile Remove="Migrations\20210512080237_ChangeNotification.Designer.cs" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="PagedList.Core.Mvc" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BizzAppEvents\BizzAppEvents.csproj" />
+    <ProjectReference Include="..\BizzAppInfrastructure\BizzAppInfrastructure.csproj" />
+    <ProjectReference Include="..\DomainClass\DomainClass.csproj" />
+    <ProjectReference Include="..\Extensions\Extensions.csproj" />
+  </ItemGroup>
+
+</Project>

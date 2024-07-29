@@ -1,0 +1,8 @@
+﻿@model PagedList.Core.PagedList<DomainClass.Review.Queries.UserReviewPaginateQuery>
+
+@{
+	ViewData["Title"] = "بررسی ها";
+	Layout = "~/Areas/Profile/Views/Shared/_ProfileLayout.cshtml";
+}
+
+<partial name="Partials/_AllReviewsPartial.cshtml" model="Model" />

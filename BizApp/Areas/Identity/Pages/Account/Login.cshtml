@@ -1,0 +1,166 @@
+﻿@page
+@model LoginModel
+
+@{
+	ViewData["Title"] = "ورود";
+	Layout = "_MainWebSiteLayout";
+}
+
+<header class="header-type2">
+	<div class="container">
+		<div class="header-type2__logo">
+			<a href="@Url.Content("~/")"><img  style="border-radius:8px" src="~/Designs/MainWebSite/Logo/bizzapplogo.jpeg" /></a>
+		</div>
+	</div>
+</header>
+
+<main>
+	<section class="login">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-sm-7">
+					<div class="login__item">
+						<div class="login__item__title">
+							<h2>وارد BizzAp شوید</h2>
+						</div>
+						<div class="login__item__subtitle">
+							<p>تازه وارد BizzAp هستید؟</p>
+							<a href="/identity/account/register"><span>ثبت نام</span></a>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+							<label class="form-check-label" for="flexCheckChecked">
+								با ادامه ، من با <a herf="#">شرایط خدمات</a>BizzAp موافقت می کنم و <a herf="#">سیاست حفظ حریم خصوصی</a> BizzAp ، از جمله سیاست کوکی BizzAp را تأیید می کنم.
+							</label>
+						</div>
+						<div class="login__item__form">
+							<div class="login__item__form__google">
+								<a href="#">با Google ادامه دهید</a>
+							</div>
+						</div>
+						<div class="login__item__title-or">
+							<span>یا</span>
+						</div>
+
+						<form id="account" method="post" class="login-form">
+							<div class="form-group">
+								<input class="form-control" asp-for="Input.Username" placeholder="نام کاربری" />
+								<span asp-validation-for="Input.Username" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+								<input class="form-control" asp-for="Input.Password" placeholder="رمز عبور" />
+								<span asp-validation-for="Input.Password" class="text-danger"></span>
+							</div>
+							<div class="Forgot-password">
+								<a href="#">رمز عبور خود را فراموش کرده اید؟</a>
+							</div>
+
+							<div asp-validation-summary="All" class="text-danger"></div>
+							
+							<button type="submit" class="btn btn-primary">ورود</button>
+
+							<div class="form-check" style="margin-top:10px">
+								<input class="form-check-input" asp-for="Input.RememberMe">
+								<label class="form-check-label" asp-for="Input.RememberMe">
+									@*@Html.DisplayNameFor(m => m.Input.RememberMe)*@
+
+									مرا به خاطر بسپار
+								</label>
+							</div>
+
+							@*<p class="message">رمز خود را فراموش کرده اید؟ <a id="forgot-password" asp-page="./ForgotPassword">بازیابی رمز عبور</a></p>*@
+
+						</form>
+						<div class="login__item__sub-form">
+							<p>تازه وارد BizzAp هستید؟</p>
+							<a href="/identity/account/register"><span>ثبت نام</span></a>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-5  d-none d-sm-block  ">
+					<div class="login__image">
+						<img src="~/Designs/MainWebSite/assets/img/img-login.png" />
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+</main>
+
+<script type="text/javascript">
+	$('.message a').click(function () {
+		$('form').animate({ height: "toggle", opacity: "toggle" }, "slow");
+	});
+</script>
+<partial name="_ValidationScriptsPartial" />
+
+@*<h1>@ViewData["Title"]</h1>
+	<div class="row">
+		<div class="col-md-4">
+			<section>
+				<form id="account" method="post">
+					<h4>Use a local account to log in.</h4>
+					<hr />
+					<div asp-validation-summary="All" class="text-danger"></div>
+					<div class="form-group">
+						<label asp-for="Input.Email"></label>
+						<input asp-for="Input.Email" class="form-control" />
+						<span asp-validation-for="Input.Email" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="Input.Password"></label>
+						<input asp-for="Input.Password" class="form-control" />
+						<span asp-validation-for="Input.Password" class="text-danger"></span>
+					</div>
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Log in</button>
+					</div>
+					<div class="form-group">
+						<p>
+							<a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+						</p>
+						<p>
+							<a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+						</p>
+					</div>
+				</form>
+			</section>
+		</div>
+		<div class="col-md-6 col-md-offset-2">
+			<section>
+				<h4>Use another service to log in.</h4>
+				<hr />
+				@{
+					if ((Model.ExternalLogins?.Count ?? 0) == 0)
+					{
+						<div>
+							<p>
+								There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+								for details on setting up this ASP.NET application to support logging in via external services.
+							</p>
+						</div>
+					}
+					else
+					{
+						<form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+							<div>
+								<p>
+									@foreach (var provider in Model.ExternalLogins)
+									{
+										<button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+									}
+								</p>
+							</div>
+						</form>
+					}
+				}
+			</section>
+		</div>
+	</div>
+
+	@section Scripts {
+		<partial name="_ValidationScriptsPartial" />
+	}*@

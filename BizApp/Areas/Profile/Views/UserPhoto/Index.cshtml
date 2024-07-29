@@ -1,0 +1,171 @@
+﻿@model BizApp.Areas.Profile.Models.UserPhotosWithProfileDetailViewModel
+@{
+	ViewData["Title"] = "تصاویر پروفایل";
+	Layout = "~/Views/Shared/_AllPagesLayout.cshtml";
+
+	var currentUser = User.Identity.Name;
+	var userName = Context.Request.Query["username"].ToString();
+
+	var hasAccess = currentUser != null;
+	if (!string.IsNullOrEmpty(userName))
+	{
+		hasAccess = userName.Equals(currentUser, StringComparison.OrdinalIgnoreCase);
+	}
+}
+
+@section head {
+	<style>
+		.upload-btn {
+			color: #fff !important;
+			background: #d32323;
+			padding: 0 35px;
+			line-height: 36px;
+			border: none;
+			border-radius: 3px;
+			font-size: 13px;
+			font-weight: 600;
+			display: inline-block;
+			margin-top: 5%;
+		}
+	</style>
+}
+
+<main>
+	<partial name="~/Areas/Profile/Views/Shared/_ShowMessagePartial.cshtml" />
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7 md-7">
+				@{ViewBag.UserName = !string.IsNullOrEmpty(userName) ? userName : currentUser; }
+				<partial name="_HeaderPartial" />
+			</div>
+
+			@if (hasAccess)
+			{
+				<div class="col-md-5">
+					<div class="dz-message" data-dz-message="">
+						<a asp-area="profile" asp-controller="userphoto" asp-action="upload" class="upload-btn">آپلود تصویر</a>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+
+	<section class="profile-content-all-photos">
+		<div class="container">
+			<div class="profile-content-all-photos__item">
+				<ul>
+					@{ int count = 0; }
+					@foreach (var photo in Model.UserPhotos)
+					{
+						<li>
+							<a href="#" data-toggle="modal" data-target="#click-photo" onclick="setSliderIndex(@(count++))">
+								<img src="@photo.Path" alt="" />
+							</a>
+						</li>
+					}
+				</ul>
+			</div>
+
+			<div class="col-sm-7">
+				<div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+					<ul class="pagination">
+						<li>
+							<pager list="@Model.UserPhotos" asp-controller="userphoto" asp-action="Index" asp-area="profile" />
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="profile-content-all-photos__pagination">
+				<span>صفحه 1 از 1</span>
+			</div>
+
+		</div>
+	</section>
+
+	@(count = 1)
+	<div class="profile-content-all-photos__modal modal fade" id="click-photo" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="profile-content-all-photos__modal__close" data-dismiss="modal">
+						<span>بستن</span>
+						<svg id="24x24_close" height="24" viewBox="0 0 24 24" width="24"><path d="M17.657 19.07L12 13.415 6.343 19.07 4.93 17.658 10.585 12 4.93 6.343 6.342 4.93 12 10.585l5.657-5.657L19.07 6.34 13.416 12l5.657 5.657-1.413 1.414z"></path></svg>
+					</div>
+					<div class="row" data-space="10">
+						<div class="col-lg-10 col-md-9 col-sm-8">
+							<div class="swiper-container">
+								<div class="swiper-wrapper">
+									@foreach (var photo in Model.UserPhotos)
+									{
+										<div class="swiper-slide" id="@photo.Id" tabindex="@(count++)">
+											<div class="profile-content-all-photos__modal__image">
+												<a href="#">
+													<img src="@photo.Path" alt="">
+												</a>
+											</div>
+										</div>
+									}
+								</div>
+								<div class="swiper-pagination"></div>
+								<div class="swiper-button-next"></div>
+								<div class="swiper-button-prev"></div>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-3 col-sm-4">
+							<div class="profile-content-all-photos__modal__content">
+
+								@await Html.PartialAsync("Partials/_UserInfoPartial", Model.ProfileDetail)
+
+								@if (hasAccess)
+								{
+									<div class="profile-content-all-photos__modal__content__desc">
+										<form asp-action="setasprimary" asp-controller="userphoto" asp-area="profile" method="post" id="setAsPrimaryForm">
+											<input type="hidden" id="photoId" name="id" />
+											<button type="submit" class="btn btn-link btn-sm" style="font-size:12px;" onclick="setAsPrimary()">تنظیم به عنوان تصویر اصلی</button>
+										</form>
+										<form asp-action="confirmDelete" asp-controller="userphoto" asp-area="profile" method="get">
+											<input type="hidden" id="deleteId" name="id" />
+											<button type="submit" class="btn btn-link btn-sm" onclick="deletePhoto()" style="font-size:12px;">حذف تصویر</button>
+										</form>
+									</div>
+								}
+								<div class="profile-content-all-photos__modal__content__date">
+									<span>@*@photo.CreatedAt*@</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</main>
+
+@section Scripts {
+	<script>
+		function setSliderIndex(index) {
+			// Initialize Swiper
+			var swiper = document.querySelector('.swiper-container').swiper;
+
+			swiper.slideTo(index);
+			swiper.autoplay.pause = true;
+		}
+
+		function setAsPrimary() {
+			var swiper = document.querySelector('.swiper-container').swiper;
+			var photoId = swiper.slides[swiper.activeIndex].id;
+
+			$('#photoId').val(photoId);
+		}
+
+		function deletePhoto() {
+			var swiper = document.querySelector('.swiper-container').swiper;
+			var photoId = swiper.slides[swiper.activeIndex].id;
+
+			$('#deleteId').val(photoId);
+		}
+	</script>
+}
